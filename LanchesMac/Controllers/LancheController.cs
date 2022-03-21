@@ -26,7 +26,7 @@ namespace LanchesMac.Controllers
             }
             else
             {
-                if(string.Equals("Normal", categoria, StringComparison.OrdinalIgnoreCase))
+                /*if(string.Equals("Normal", categoria, StringComparison.OrdinalIgnoreCase))
                 {
                     lanches = _lancheRepository.Lanches
                     .Where(l => l.Categoria.CategoriaNome.Equals("Normal"))
@@ -37,7 +37,8 @@ namespace LanchesMac.Controllers
                     lanches = _lancheRepository.Lanches
                     .Where(l => l.Categoria.CategoriaNome.Equals("Natural"))
                     .OrderBy(l => l.LancheName);
-                }
+                }*/
+                lanches = _lancheRepository.Lanches.Where(l => l.Categoria.CategoriaNome.Equals(categoria)).OrderBy(c => c.LancheName);
                 categorialAtual = categoria;
             }
             var lanchesListViewModel = new LancheListViewModel
@@ -47,6 +48,12 @@ namespace LanchesMac.Controllers
             };
 
             return View(lanchesListViewModel);
+        }
+
+        public IActionResult Details(int lancheId)
+        {
+            var lanche = _lancheRepository.Lanches.FirstOrDefault(l => l.LancheId == lancheId);
+            return View(lanche);
         }
     }
 }
