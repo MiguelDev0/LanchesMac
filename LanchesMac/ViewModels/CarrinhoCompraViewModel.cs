@@ -8,4 +8,3 @@ namespace LanchesMac.ViewModels
         public decimal CarrinhoCompraTotal { get; set; }
     }
 }
- 
